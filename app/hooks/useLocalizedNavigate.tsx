@@ -3,12 +3,18 @@ import { useLocale } from "react-intlayer";
 // eslint-disable-next-line no-restricted-imports
 import { type NavigateOptions, useNavigate } from "react-router";
 
-export function useLocalizedNavigate() {
+export const useLocalizedNavigate = () => {
   const navigate = useNavigate();
   const { locale } = useLocale();
 
-  return (to: string, options?: NavigateOptions) => {
-    const final = to.startsWith("/") ? getLocalizedUrl(to, locale) : to;
-    navigate(final, options);
+  const isExternal = (to: string) => {
+    return /^(https?:)?\/\//.test(to);
   };
-}
+
+  const localizedNavigate = (to: string, options?: NavigateOptions) => {
+    const localedTo = isExternal(to) ? to : getLocalizedUrl(to, locale);
+    navigate(localedTo, options);
+  };
+
+  return localizedNavigate;
+};
