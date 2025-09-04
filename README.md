@@ -135,15 +135,15 @@ import { layout, route, type RouteConfig } from "@react-router/dev/routes";
 export default [
   layout("routes/layout.tsx", [
     route("/", "routes/page.tsx"), // Home page with redirect
-    route("/:lang", "routes/[lang]/page.tsx"), // Localized home
-    route("/:lang/about", "routes/[lang]/about/page.tsx"), // About page
+    route("/:locale", "routes/[locale]/page.tsx"), // Localized home
+    route("/:locale/about", "routes/[locale]/about/page.tsx"), // About page
   ]),
 ] satisfies RouteConfig;
 ```
 
 ### 4. Add Intlayer Provider to Layout
 
-For locale-aware routing, wrap your localized content with `IntlayerProvider` in the language-specific layout:
+For locale-aware routing, wrap your localized content with `IntlayerProvider` in the localeuage-specific layout:
 
 ```tsx
 // app/routes/layout.tsx
@@ -153,7 +153,7 @@ import { IntlayerProvider } from "react-intlayer";
 import { useI18nHTMLAttributes } from "app/hooks/useI18nHTMLAttributes";
 
 export default function RootLayout() {
-  useI18nHTMLAttributes(); // Set HTML lang attribute
+  useI18nHTMLAttributes(); // Set HTML locale attribute
 
   return (
     <IntlayerProvider>
@@ -168,7 +168,7 @@ export default function RootLayout() {
 Access translations/content using the `useIntlayer` hook and use `LocalizedLink` for locale-aware navigation:
 
 ```tsx
-// app/routes/[lang]/page.tsx
+// app/routes/[locale]/page.tsx
 import { useIntlayer } from "react-intlayer";
 import LocalizedLink from "~/components/localized-link";
 
@@ -205,7 +205,7 @@ export default defineConfig({
 Create content files for each page/component, e.g.:
 
 ```ts
-// app/routes/[lang]/page.content.ts
+// app/routes/[locale]/page.content.ts
 import { type Dictionary, t } from "intlayer";
 
 const pageContent = {
