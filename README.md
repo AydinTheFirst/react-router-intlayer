@@ -274,13 +274,28 @@ function MyComponent() {
 
 Note: ESLint is configured to prevent direct imports from `react-router` to encourage using localized wrappers.
 
-### 8. Run and Build
+### 8. Type Safety
+
+To enable type safety for your Intlayer dictionaries and content, ensure your `tsconfig.json` includes the Intlayer types. Add the following to your configuration:
+
+```json
+{
+  "include": [
+    ".intlayer/types/**/*"
+    // ...other includes
+  ]
+}
+```
+
+This will provide autocompletion and type checking for your translation keys and content files throughout your project.
+
+### 9. Run and Build
 
 - Start development: `npm run dev`
 - Build for production: `npm run build`
 - Build Intlayer dictionaries: `npm run intlayer:build`
 
-### 9. References
+### 10. References
 
 - [react-router-app example](https://github.com/aymericzip/intlayer/tree/main/examples/react-router-app) - Official Intlayer example
 - [Intlayer with Vite and React](https://intlayer.org/doc/environment/vite-and-react) - Setup guide for Vite + React
