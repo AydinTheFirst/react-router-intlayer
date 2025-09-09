@@ -315,7 +315,7 @@ import { useLocalizedNavigate } from "~/hooks/useLocalizedNavigate";
 import type { Route } from "./+types/($locale)";
 
 export const meta: Route.MetaFunction = ({ params }) => {
-  const content = getIntlayer("page-meta", params.locale);
+  const content = getIntlayer("page", params.locale).meta;
   return [
     { title: content.title },
     { content: content.description, name: "description" },
